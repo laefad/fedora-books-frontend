@@ -1,0 +1,16 @@
+query getUser ($where: UserWhereUniqueInput!) {
+    user(where: $where) {
+        id
+        name
+        role
+        coverImage
+        bookLists {
+            id
+            name
+        }
+        userTags {
+            id 
+            name
+        }
+    }
+}

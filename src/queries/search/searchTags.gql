@@ -1,0 +1,12 @@
+query searchTags(
+  $where: TagWhereInput, 
+  $take: Int, 
+  $skip: Int, 
+  $orderBy: [TagOrderByWithRelationInput!]
+) {
+  tags (where: $where, take: $take, skip: $skip, orderBy: $orderBy) {
+    id
+    name
+    description
+  }
+}

@@ -1,0 +1,14 @@
+query getUserTag($userTagId: String) {
+    findFirstUserTag(where: {
+        id: { equals: $userTagId }
+    }) {
+        id
+        name
+        description
+        user {
+            id
+            name
+            coverImage
+        }
+    } 
+}

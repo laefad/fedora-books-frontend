@@ -1,0 +1,10 @@
+query getAuthor($authorId: String) {
+    findFirstAuthor(where: {
+        id: { equals: $authorId }
+    }) {
+        id
+        name
+        description
+        coverImage
+    } 
+}

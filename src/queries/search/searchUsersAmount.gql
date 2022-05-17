@@ -1,0 +1,7 @@
+query searchUsersAmount($where: UserWhereInput) {
+  aggregateUser (where: $where) {
+    _count {
+      _all
+    }
+  }
+}

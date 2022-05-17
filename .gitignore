@@ -1,0 +1,11 @@
+node_modules
+dist
+
+.env
+
+# generated
+generated
+schema.gql
+
+# local files
+todo.md

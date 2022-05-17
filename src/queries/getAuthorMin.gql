@@ -1,0 +1,7 @@
+query getAuthorMin($where: AuthorWhereInput, $take: Int) {
+    authors(where: $where, take: $take) {
+        id
+        coverImage
+        name
+    }
+}

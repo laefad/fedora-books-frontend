@@ -1,0 +1,6 @@
+query getTagMin($where: TagWhereInput, $take: Int) {
+    tags(where: $where, take: $take) {
+        id
+        name
+    }
+}

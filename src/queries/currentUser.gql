@@ -1,0 +1,8 @@
+query currentUser {
+    getCurrentUser {
+        id
+        name
+        role
+        coverImage
+    }
+}

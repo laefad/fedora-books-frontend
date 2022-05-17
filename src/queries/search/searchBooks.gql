@@ -1,0 +1,13 @@
+query searchBooks(
+  $where: BookWhereInput, 
+  $take: Int, 
+  $skip: Int, 
+  $orderBy: [BookOrderByWithRelationInput!]
+) {
+  books(where: $where, take: $take, skip: $skip, orderBy: $orderBy) {
+    id
+    name
+    coverImage
+    description
+  }
+}

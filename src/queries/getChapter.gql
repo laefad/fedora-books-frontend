@@ -1,0 +1,28 @@
+query getChapter($chapterId: String!) {
+    findFirstChapter (where: {
+        id: {
+            equals: $chapterId
+        }
+    }) {
+        id
+        book {
+            id
+        }
+        name
+        type
+        paragraphs {
+            id
+            content
+            align
+            firstLineIndent
+        }
+        nestedChapters {
+            id
+            name
+        }
+        topChapter {
+            id
+            name
+        }
+    }
+}

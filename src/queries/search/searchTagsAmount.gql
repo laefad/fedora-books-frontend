@@ -1,0 +1,7 @@
+query searchTagsAmount($where: TagWhereInput) {
+  aggregateTag (where: $where) {
+    _count {
+      _all
+    }
+  }
+}

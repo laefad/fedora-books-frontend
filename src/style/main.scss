@@ -1,0 +1,8 @@
+// @use ".cache/vuetify/styles.scss" with (
+@use 'vuetify/styles/main.sass' with (
+  $heading-font-family: 'Cinzel',
+  $body-font-family: 'Montserrat'
+);
+
+@import '@fontsource/montserrat';
+@import '@fontsource/cinzel';

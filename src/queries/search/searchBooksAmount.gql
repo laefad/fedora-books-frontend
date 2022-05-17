@@ -1,0 +1,7 @@
+query searchBooksAmount($where: BookWhereInput) {
+  aggregateBook(where: $where) {
+    _count {
+      _all
+    }
+  }
+}

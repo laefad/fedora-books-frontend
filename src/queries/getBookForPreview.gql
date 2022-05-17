@@ -1,0 +1,29 @@
+query getBookForAbout($bookId: String!, $tagsParams: UserTagWhereInput) {
+    findFirstBook (where: {
+        id: {
+            equals: $bookId
+        }
+    }) {
+        name
+        publishedAt
+        coverImage
+        description
+        tags {
+            id
+            name
+        }
+        userTags(where: $tagsParams) {
+            id
+            name
+        }
+        authors {
+            id
+            name
+            coverImage
+        }
+        bookLists {
+            id
+            name
+        }
+    }
+}

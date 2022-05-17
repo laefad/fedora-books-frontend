@@ -1,0 +1,12 @@
+query searchBookLists(
+  $where: BookListWhereInput, 
+  $take: Int, 
+  $skip: Int, 
+  $orderBy: [BookListOrderByWithRelationInput!]
+) {
+  bookLists (where: $where, take: $take, skip: $skip, orderBy: $orderBy) {
+    id
+    name
+    description
+  }
+}

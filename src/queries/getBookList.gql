@@ -1,0 +1,19 @@
+query getBookList($bookListId: String) {
+    bookList(where: {
+        id: $bookListId
+    }) {
+        name
+        description
+        user {
+            id
+            name
+            coverImage
+        }
+        books {
+            id
+            name
+            coverImage
+            description
+        }
+    }
+}

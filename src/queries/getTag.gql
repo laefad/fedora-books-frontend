@@ -1,0 +1,9 @@
+query getTag($tagId: String) {
+    findFirstTag(where: {
+        id: { equals: $tagId }
+    }) {
+        id
+        name
+        description
+    } 
+}

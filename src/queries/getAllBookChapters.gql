@@ -1,0 +1,17 @@
+query getAllBookChapters($bookId: String!) {
+    chapters (where: {
+        book: {
+            is: {
+                id: {
+                    equals: $bookId
+                }
+            }
+        }
+    }) {
+        id
+        name
+        topChapter {
+            id
+        }
+    }
+}

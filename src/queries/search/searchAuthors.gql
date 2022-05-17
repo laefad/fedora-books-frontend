@@ -1,0 +1,13 @@
+query searchAuthors(
+  $where: AuthorWhereInput, 
+  $take: Int, 
+  $skip: Int, 
+  $orderBy: [AuthorOrderByWithRelationInput!]
+) {
+  authors (where: $where, take: $take, skip: $skip, orderBy: $orderBy) {
+    id
+    name
+    coverImage
+    description
+  }
+}

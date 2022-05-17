@@ -1,0 +1,12 @@
+query searchUserTags(
+  $where: UserTagWhereInput, 
+  $take: Int, 
+  $skip: Int, 
+  $orderBy: [UserTagOrderByWithRelationInput!]
+) {
+  userTags (where: $where, take: $take, skip: $skip, orderBy: $orderBy) {
+    id
+    name
+    description
+  }
+}

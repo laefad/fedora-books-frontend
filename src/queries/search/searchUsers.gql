@@ -1,0 +1,13 @@
+query searchUsers(
+  $where: UserWhereInput, 
+  $take: Int, 
+  $skip: Int, 
+  $orderBy: [UserOrderByWithRelationInput!]
+) {
+  users (where: $where, take: $take, skip: $skip, orderBy: $orderBy) {
+    id
+    name
+    coverImage
+    role
+  }
+}

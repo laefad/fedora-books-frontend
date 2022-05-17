@@ -1,0 +1,7 @@
+query searchAuthorsAmount($where: AuthorWhereInput) {
+  aggregateAuthor (where: $where) {
+    _count {
+      _all
+    }
+  }
+}
