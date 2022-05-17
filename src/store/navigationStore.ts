@@ -61,10 +61,10 @@ export const useNavigationStore = defineStore('NavigationStore', {
     }),
     actions: {
         hide() {
-            this.visible = true;
+            this.visible = false;
         },
         show() {
-            this.visible = false;
+            this.visible = true;
         },
         toggle() {
             this.visible = !this.visible;
