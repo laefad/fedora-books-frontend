@@ -22,7 +22,13 @@
 		"vetur.validation.templateProps": true,
 		"[vue]": {
 			"editor.defaultFormatter": "Vue.volar"
-		}
+		},
+		"json.schemas": [
+			{
+				"fileMatch": ["vercel.json"],
+				"url": "https://openapi.vercel.sh/vercel.json"
+			}
+		]
 	},
 
 
