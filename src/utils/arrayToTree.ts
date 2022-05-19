@@ -1,39 +1,65 @@
-import { twoSideFilter } from '@/utils';
 
+// Utility type
+type KeysOfType<O, T> = {
+    [K in keyof O]: O[K] extends T ? K : never
+}[keyof O];
 
-// TODO decrease O(N^2 recursive) to O(N) or O(N^2)
-// see https://stackoverflow.com/questions/18017869/build-tree-array-from-flat-array-in-javascript
 export const arrayToTree = <
     T extends {},
-    R extends {},
-    Key
+    // Needs for correct typing
+    CHKey extends string = 'children',
+    K extends string | number | symbol = string,
 >(
     array: Readonly<Array<T>>,
-    key: (el: Readonly<T>) => Key,
-    parentKey: (el: Readonly<T>) => Key | null,
-    withChilds: (el: Readonly<T>, childEls: Readonly<Array<R>>) => R,
-    baseKey: Key | null = null
-): {
-    tree: Array<R>,
-    orphans: Array<T>
-} => {
-    let { satisfied, rest } = twoSideFilter(array, (el) => parentKey(el) == baseKey);
+    {
+        key,
+        parentKey,
+        childrenKey,
+        baseKey
+    } : {
+        key: KeysOfType<T, K>,
+        parentKey: KeysOfType<T, K | null>,
+        childrenKey: CHKey,
+        baseKey: K | null
+    }
+) => {
 
-    const tree = satisfied.map(el => {
-        const elKey = key(el);
-        const result = twoSideFilter(rest, (innerEl) => parentKey(innerEl) == elKey);
-        rest = result.rest;
-        return withChilds(el, 
-            result.satisfied.map(satisfiedEl => {
-                const { tree, orphans } = arrayToTree(rest, key, parentKey, withChilds, key(satisfiedEl));
-                rest = orphans;
-                return withChilds(satisfiedEl, tree);
-            })
-        );
+    type HashMapElement = {
+        [key in CHKey]: Array<HashMapElement>;
+    } & T;
+
+    const hashMap = {} as Record<K, HashMapElement>;
+    const roots = {} as Record<K, HashMapElement>;
+
+    // TODO orphans are ignored
+
+    array.forEach((el) => {
+        const k = el[key] as unknown as K;
+        const pk = el[parentKey] as unknown as K;
+
+        if (hashMap[k]) {
+            Object.assign(hashMap[k], el); 
+        } else {
+            hashMap[k] = Object.assign(el, {
+                [childrenKey]: [] as Array<HashMapElement>
+            }) as HashMapElement;
+        }
+
+        if (pk != baseKey && pk != null) {
+            if (hashMap[pk]) {
+                hashMap[pk][childrenKey].push(hashMap[k]);
+            } else {
+                hashMap[pk] = {
+                    [childrenKey]: [hashMap[k]],
+                } as HashMapElement;
+            }
+        } else {
+            roots[k] = hashMap[k];
+        }
+        
     });
 
-    return {
-        tree,
-        orphans: rest
-    };
+    return Object.entries<HashMapElement>(roots).map(
+        ([key, value]) => value
+    );
 }

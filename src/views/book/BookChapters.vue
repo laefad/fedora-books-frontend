@@ -7,7 +7,7 @@ p.body-2(v-else-if="loading")
   | Loading...
 template(v-else)
   chapters-list(
-    :items="chapters.tree"
+    :items="chapters"
     :book-id="bookId"
   )
 </template>
