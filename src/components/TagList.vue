@@ -2,9 +2,9 @@
 v-row
   v-col
     v-chip(
-      v-for="tag in tags" :key="tag.id"
+      v-for="tag, i in tags" :key="tag.id"
       :to="getTagHref(tag)"
-      :color="getRandomColor()"
+      :color="colors[i]"
       link
       variant="outlined"
     ) 
@@ -15,13 +15,18 @@ v-row
 // Types
 import type { Tag, UserTag } from '@/generated';
 
+// Utilities
+import { computed } from 'vue';
+import { generateHSLColors } from '@/utils';
+
 const { tags, variant } = defineProps<{
   tags: Readonly<Array<PartialWithRequired<Tag | UserTag, "id" | "name">>>;
   variant: 'userTag' | 'tag';
 }>();
 
-// TODO поменять способ генерации цвета с учетом темы и читаемости на ней.
-const getRandomColor = () => '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+// TODO add theme condition
+const colors = computed(() => generateHSLColors(90, 40, tags.length));
+
 const getTagHref = (tag: PartialWithRequired<Tag | UserTag, "id">) => (variant == 'userTag' ? '/userTag/' : '/tag/') + tag.id;
 
 </script>
