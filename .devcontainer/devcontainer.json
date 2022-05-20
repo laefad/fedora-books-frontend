@@ -16,10 +16,12 @@
 	"settings": {
 		"files.eol": "\n",
 		"volar.codeLens.pugTools": true,
-		"volar.codeLens.scriptSetupTools": true,
-		// TODO 2 spaces for vue, and 4 for other files
-		"vetur.format.options.tabSize": 4,
-		"vetur.validation.templateProps": true,
+		// so many missclicks...
+		// "volar.codeLens.scriptSetupTools": true,
+		"volar.vueserver.useSecondServer": true,
+		// TODO 2 spaces for vue, qraphql, etc. and 4 for ts files
+		// "vetur.format.options.tabSize": 4,
+		// "vetur.validation.templateProps": true,
 		"[vue]": {
 			"editor.defaultFormatter": "Vue.volar"
 		},
@@ -31,7 +33,6 @@
 		]
 	},
 
-
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
@@ -41,7 +42,7 @@
 		"Wscats.vue",
 		"johnsoncodehk.volar",
 		"Vue.vscode-typescript-vue-plugin",
-		"octref.vetur",
+		// "octref.vetur",
 
 		"steoates.autoimport",
 		"christian-kohler.path-intellisense",
