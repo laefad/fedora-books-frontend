@@ -23,11 +23,11 @@ export const useBookChaptersTree = (
             getValue(rawChapters).map((ch) => ({
                 id: ch.id,
                 name: ch.name,
-                topChapter: ch.topChapter?.id ?? null
+                top: ch.top?.id ?? null
             })),
             {
                 key: 'id',
-                parentKey: 'topChapter',
+                parentKey: 'top',
                 childrenKey: 'children',
                 baseKey: null
             }

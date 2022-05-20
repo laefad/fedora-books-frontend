@@ -1,10 +1,10 @@
 <template lang="pug">
 p.text-h1.text-center Главы:
 p.body-2.error(v-if="error")
-  | Error! 
+  | Произошла ошибка 
   | {{ error }}
 p.body-2(v-else-if="loading")
-  | Loading...
+  | Загрузка...
 template(v-else)
   chapters-list(
     :items="chapters"

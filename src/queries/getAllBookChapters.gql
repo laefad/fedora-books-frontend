@@ -10,7 +10,7 @@ query getAllBookChapters($bookId: String!) {
     }) {
         id
         name
-        topChapter {
+        top {
             id
         }
     }

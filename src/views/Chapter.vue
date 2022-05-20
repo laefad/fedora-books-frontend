@@ -1,6 +1,7 @@
 <template lang="pug">
 v-main
   //- TODO custom style for heading
+  //- TODO breadcrumbs for headings here ?
   p.text-h1.text-center
     | {{ chapterName }}
   v-container(v-if="chapters.length > 0")
@@ -9,15 +10,15 @@ v-main
     )
       router-link.text-subtitle-1(
         :id="id"
-        :to='getChapterLink(id)'
+        :to='`/chapter/${id}`'
         link
       ) {{ name }}
   v-row.w-100
     v-col.d-flex.flex-column.justify-center.align-center(cols="1")
       v-btn(
-        v-if="prev"
+        v-if="prevId"
         :icon="mdiChevronLeft"
-        :to="prev"
+        :to="`/chapter/${prevId}`"
         position="fixed"
         top="50%"
         color="primary"
@@ -30,9 +31,9 @@ v-main
       )
     v-col.d-flex.flex-column.justify-center.align-center(cols="1")
       v-btn(
-        v-if="next"
+        v-if="nextId"
         :icon="mdiChevronRight"
-        :to="next"
+        :to="`/chapter/${nextId}`"
         position="fixed"
         top="50%"
         color="primary"
@@ -44,22 +45,17 @@ v-main
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 
 // Components
-import BookNavigation from '@/components/BookNavigation.vue';
+import { RouterLink } from 'vue-router';
 import BookParagraph from '@/components/BookParagraph.vue';
-import ChaptersList from '@/components/ChaptersList.vue';
 import FullScreenButton from '@/components/FullScreenButton.vue';
 
 // Composables
-import { useRouteParams, useBookChaptersTree } from '@/composables';
+import { useRouteParams } from '@/composables';
 import { useGetChapterQuery } from '@/generated';
-import { useAppBarStore } from '@/store';
 
 // Utilities 
 import { computed } from 'vue';
-import { chaptersTreeWithPointers, getValue } from '@/utils';
-
-// TODO change title
-const appBarStore = useAppBarStore();
+import { getValue } from '@/utils';
 
 const { chapterId } = useRouteParams<{
   chapterId: string;
@@ -71,24 +67,16 @@ const { result, error, loading } = useGetChapterQuery(
   }))
 );
 
-const chapterName = computed(() => result.value?.findFirstChapter?.name ?? "");
-const paragraphs = computed(() => result.value?.findFirstChapter?.paragraphs ?? []);
-const chapters = computed(() => result.value?.findFirstChapter?.nestedChapters ?? []);
-const bookId = computed(() => result.value?.findFirstChapter?.book?.id ?? "");
-
-const { 
-  chapters: chaptersTree, 
-  error: bookChaptersTreeError, 
-  loading: bookChaptersTreeLoading 
-} = useBookChaptersTree(bookId);
-
-const pointers = computed(() => 
-  chaptersTreeWithPointers(chaptersTree.value.tree).hashMap[getValue(chapterId)]
-);
-
-const next = computed(() => pointers.value?.next ? getChapterLink(pointers.value.next) : null);
-const prev = computed(() => pointers.value?.prev ? getChapterLink(pointers.value.prev) : null);
-
-const getChapterLink = (id: string) => `/chapter/${id}`;
+const chapterName = computed(() => result.value?.chapter?.name ?? "");
+const paragraphs = computed(() => result.value?.chapter?.paragraphs ?? []);
+const chapters = computed(() => result.value?.chapter?.nestedChapters ?? []);
+const bookId = computed(() => result.value?.chapter?.book?.id ?? "");
+// Navigation
+const topId = computed(() => result.value?.chapter?.top?.id ?? "");
+const topName = computed(() => result.value?.chapter?.top?.name ?? "");
+const nextId = computed(() => result.value?.chapter?.next?.id ?? "");
+const nextName = computed(() => result.value?.chapter?.next?.name ?? "");
+const prevId = computed(() => result.value?.chapter?.prev?.id ?? "");
+const prevName = computed(() => result.value?.chapter?.prev?.name ?? "");
 
 </script>

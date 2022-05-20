@@ -1,4 +1,5 @@
 
+// TODO remove?? 
 export const twoSideFilter = <T>(
   array: Readonly<Array<T>>,
   condition: (el: Readonly<T>) => boolean

@@ -7,7 +7,7 @@ v-container
     :id="item.id"
   )
     router-link(
-      :to="getChapterLink(item.id)"
+      :to="`/chapter/${item.id}`"
       :class="getTypograpyClass()"
     )
       | {{ item.name }}
@@ -19,6 +19,8 @@ v-container
 </template>
 
 <script lang="ts" setup>
+// Сomponents
+import { RouterLink } from 'vue-router';
 
 interface ItemType {
   id: string;
@@ -33,7 +35,8 @@ const { items, depth } = withDefaults(defineProps<{
   depth: 0
 });
 
-const getChapterLink = (id: string) => `/chapter/${id}`;
-const getTypograpyClass = (offset = 3) => depth + offset <= 6 ? `text-h${depth + offset + 1}` : 'text-subtitle-1';
+const getTypograpyClass = (offset = 3) => depth + offset <= 6
+  ? `text-h${depth + offset + 1}`
+  : 'text-subtitle-1';
 
 </script>

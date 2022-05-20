@@ -1,8 +1,6 @@
 query getChapter($chapterId: String!) {
-    findFirstChapter (where: {
-        id: {
-            equals: $chapterId
-        }
+    chapter (where: {
+        id: $chapterId
     }) {
         id
         book {
@@ -20,7 +18,15 @@ query getChapter($chapterId: String!) {
             id
             name
         }
-        topChapter {
+        top {
+            id
+            name
+        }
+        next {
+            id
+            name
+        }
+        prev {
             id
             name
         }
