@@ -38,9 +38,9 @@
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
 
-		"jcbuisson.vue",
+		// "jcbuisson.vue",
 		"Wscats.vue",
-		"johnsoncodehk.volar",
+		"Vue.volar",
 		"Vue.vscode-typescript-vue-plugin",
 		// "octref.vetur",
 
